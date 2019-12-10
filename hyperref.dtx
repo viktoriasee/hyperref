@@ -643,6 +643,9 @@
 %
 %    \begin{macrocode}
 \RequirePackage{iftex}[2019/10/24]
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \RequirePackage{pdftexcmds}[2009/04/10]
 \@ifpackagelater{pdftexcmds}{2010/11/04}{}{%
   \@ifundefined{pdfdraftmode}{%
@@ -3611,14 +3614,14 @@
   }%
   \def\HyPsd@@ProtectSpacesFi#1 #2\HyPsd@fi{%
     \fi
-    \etex@unexpanded{#1}%
+    \unexpanded{#1}%
     \ifx\scrollmode#2\scrollmode
     \else
       \HyPsd@@ProtectSpacesFi\HyPsd@UnexpandableSpace#2%
     \HyPsd@fi
   }%
   \def\HyPsd@RemoveMask|#1|\HyPsd@End#2{%
-    \xdef#2{\etex@unexpanded\expandafter{#1}}%
+    \xdef#2{\unexpanded\expandafter{#1}}%
   }%
 %    \end{macrocode}
 %    \end{macro}
