@@ -3577,13 +3577,7 @@
 % \subsubsection{Protecting spaces}
 %
 %    \begin{macrocode}
-\RequirePackage{etexcmds}[2007/09/09]
-\ifetex@unexpanded
-  \expandafter\@secondoftwo
-\else
-  \expandafter\@firstoftwo
-\fi
-{%
+% \RequirePackage{etexcmds}[2007/09/09]
 %    \end{macrocode}
 %
 %    \begin{macro}{\HyPsd@ProtectSpaces}
@@ -3593,46 +3587,18 @@
 %    the expanded string. Because of this there can be no group
 %    at the beginning or end of the string and grouping characters
 %    are not removed by the call of \cs{HyPsd@@ProtectSpacesFi}.
-%    \begin{macrocode}
-  \def\HyPsd@ProtectSpaces#1{%
-    \iftrue
-      \expandafter\HyPsd@@ProtectSpacesFi
-        \expandafter|\expandafter\@empty#1| \HyPsd@End#1%
-    \fi
-  }%
-%    \end{macrocode}
 %    \end{macro}
 %    \begin{macro}{\HyPsd@@ProtectSpacesFi}
 %    The string can contain command tokens, so it is better
 %    to use an \cs{def} instead of an \cs{edef}.
-%    \begin{macrocode}
-  \def\HyPsd@@ProtectSpacesFi#1 #2\HyPsd@End#3\fi{%
-    \fi
-    \ifx\scrollmode#2\scrollmode
-      \HyPsd@RemoveMask#1\HyPsd@End#3%
-    \else
-      \gdef#3{#1\HyPsd@UnexpandableSpace#2}%
-      \expandafter\HyPsd@@ProtectSpacesFi#3\HyPsd@End#3%
-    \fi
-  }%
-%    \end{macrocode}
-%    \end{macro}
 %
 % \paragraph{Remove mask.}
 %    \begin{macro}{\HyPsd@RemoveMask}
 %    \cs{HyPsd@RemoveMask} removes the protecting \verb+|+.
 %    It is used by \cs{HyPsd@@ProtectSpacesFi} and by the code in
 %    \cs{pdfstringdef} that removes the grouping chararcters.
-%    \begin{macrocode}
-  \def\HyPsd@RemoveMask|#1|\HyPsd@End#2{%
-    \toks@\expandafter{#1}%
-    \xdef#2{\the\toks@}%
-  }%
-%    \end{macrocode}
-%    \end{macro}
 %
 %    \begin{macrocode}
-}{%
   \let\HyPsd@fi\fi
   \def\HyPsd@ProtectSpaces#1{%
     \xdef#1{%
@@ -3654,8 +3620,9 @@
   \def\HyPsd@RemoveMask|#1|\HyPsd@End#2{%
     \xdef#2{\etex@unexpanded\expandafter{#1}}%
   }%
-}
 %    \end{macrocode}
+%    \end{macro}
+%    \end{macro}
 %
 % \subsubsection{Remove grouping braces}
 %    \begin{macro}{\HyPsd@RemoveBraces}
