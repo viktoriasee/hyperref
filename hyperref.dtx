@@ -628,6 +628,18 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\def\Hy@ifpackageloaded#1{%
+  \@ifundefined{ver@#1.sty}\@secondoftwo\@firstoftwo
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\def\Hy@ifclassloaded#1{%
+  \@ifundefined{ver@#1.cls}\@secondoftwo\@firstoftwo
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \def\Hy@space{ }
 %    \end{macrocode}
 %
@@ -1077,7 +1089,7 @@
     \fi
   }%
   \def\HyCal@do#1#2\@nil{%
-    \@ifpackageloaded{calc}{}{%
+    \Hy@ifpackageloaded{calc}{}{%
       \Hy@Warning{%
         For calculations \string\hypercalcbp\space needs\MessageBreak
         package calc or e-TeX%
@@ -2085,7 +2097,7 @@
 % \subsubsection{Workaround for package linguex}
 %
 %    \begin{macrocode}
-\@ifpackageloaded{linguex}{%
+\Hy@ifpackageloaded{linguex}{%
   \let\HyLinguex@OrgB\b
   \let\HyLinguex@OrgC\c
   \let\HyLinguex@OrgD\d
@@ -2416,7 +2428,7 @@
   }%
 \fi
 \def\Hy@temp{%
-  \@ifpackageloaded{babel}{%
+  \Hy@ifpackageloaded{babel}{%
     \@ifpackagelater{babel}{2008/03/16}{%
       \let\Hy@temp\@empty
     }{%
@@ -4668,7 +4680,7 @@
 % \subsection{Class memoir}
 %
 %    \begin{macrocode}
-\@ifclassloaded{memoir}{%
+\Hy@ifclassloaded{memoir}{%
   \Hy@AtEndOfPackage{\RequirePackage{memhfixc}}%
 }{}
 %    \end{macrocode}
@@ -4676,7 +4688,7 @@
 % \subsection{Package subfigure}
 %    Added fix for version 2.1. Here \cmd{\sub@label} is defined.
 %    \begin{macrocode}
-\@ifpackageloaded{subfigure}{%
+\Hy@ifpackageloaded{subfigure}{%
   \@ifundefined{sub@label}{%
     \Hy@hypertexnamesfalse
   }{%
@@ -5272,7 +5284,7 @@
   \let\HyPsd@LoadStringEnc\relax
 }
 \Hy@AtBeginDocument{%
-  \@ifpackageloaded{stringenc}{%
+  \Hy@ifpackageloaded{stringenc}{%
     \let\HyPsd@LoadStringEnc\relax
   }{%
     \def\HyPsd@LoadStringEnc{%
@@ -6196,11 +6208,11 @@
 \def\toclevel@subparagraph{5}
 \def\toclevel@figure{0}
 \def\toclevel@table{0}
-\@ifpackageloaded{listings}{%
+\Hy@ifpackageloaded{listings}{%
   \providecommand*\theHlstlisting{\thelstlisting}%
   \providecommand*\toclevel@lstlisting{0}%
 }{}
-\@ifpackageloaded{listing}{%
+\Hy@ifpackageloaded{listing}{%
   \providecommand*\theHlisting{\thelisting}%
   \providecommand*\toclevel@listing{0}%
 }{}
@@ -7124,7 +7136,7 @@
 %    \begin{macrocode}
 \@ifpackagewith{hyperref}{tex4ht}{%
 }{%
-  \@ifpackageloaded{tex4ht}{%
+  \Hy@ifpackageloaded{tex4ht}{%
     \PassOptionsToPackage{tex4ht}{hyperref}%
   }{%
     \@ifundefined{HCode}{%
@@ -7379,7 +7391,7 @@
 %
 %    \begin{macrocode}
 \Hy@AtEndOfPackage{%
-  \@ifpackageloaded{tex4ht}{%
+  \Hy@ifpackageloaded{tex4ht}{%
     \def\Hy@driver{htex4ht}%
     \Hy@texhttrue
   }{}%
@@ -7741,7 +7753,7 @@
   \DeclareRobustCommand\pageref{%
     \@ifstar\@pagerefstar\T@pageref
   }%
-%  \@ifclassloaded{memoir}{%
+%  \Hy@ifclassloaded{memoir}{%
 %    \@ifundefined{@mem@titlerefnolink}\@secondoftwo{%
 %      \@ifundefined{@mem@titleref}\@secondoftwo\@firstoftwo
 %    }%
@@ -10000,7 +10012,7 @@
     \def\@starttoc#1{%
       \begingroup
         \makeatletter
-        \@ifpackageloaded{parskip}{\parskip\z@}{}%
+        \Hy@ifpackageloaded{parskip}{\parskip\z@}{}%
         \IfFileExists{\jobname.#1}{%
           \Hy@WarningNoLine{%
             old #1 file detected, not used; run LaTeX again%
@@ -10216,7 +10228,7 @@
 %
 %    \begin{macrocode}
   \let\HyPL@SlidesSetPage\@empty
-  \@ifclassloaded{slides}{%
+  \Hy@ifclassloaded{slides}{%
     \def\HyPL@SlidesSetPage{%
       \advance\c@page\@ne
       \ifnum\value{page}>\@ne
@@ -10826,7 +10838,7 @@
 % that the hyper stuff is not executed twice, so we use the AMS
 % |\ifmeasuring@|, initialized if AMS math is not used.
 %    \begin{macrocode}
-\@ifpackageloaded{amsmath}{}{\newif\ifmeasuring@\measuring@false}
+\Hy@ifpackageloaded{amsmath}{}{\newif\ifmeasuring@\measuring@false}
 %    \end{macrocode}
 %
 %    \begin{macro}{\hyper@refstepcounter}
@@ -11067,7 +11079,7 @@
 %    \end{macro}
 %
 %    \begin{macrocode}
-\@ifpackageloaded{fancyvrb}{%
+\Hy@ifpackageloaded{fancyvrb}{%
   \@ifpackagelater{fancyvrb}{1998/05/20}{}{%
     \def\FV@StepLineNo{%
       \FV@SetLineNo
@@ -11091,10 +11103,10 @@
 %    \begin{macro}{\lastpage@putlabel}
 %    \begin{macrocode}
 \Hy@AtBeginDocument{%
-  \@ifclassloaded{revtex4}{%
+  \Hy@ifclassloaded{revtex4}{%
     \@namedef{ver@lastpage.sty}{1994/06/25}%
   }{}%
-  \@ifpackageloaded{lastpage}{%
+  \Hy@ifpackageloaded{lastpage}{%
     \ifHy@pageanchor
     \else
       \Hy@WarningNoLine{%
@@ -11128,7 +11140,7 @@
       \fi
       \addtocounter{page}{1}%
     }%
-    \@ifclassloaded{revtex4}{%
+    \Hy@ifclassloaded{revtex4}{%
       \begingroup
         \toks@\expandafter{\lastpage@putlabel}%
         \edef\x{\endgroup
@@ -11177,7 +11189,7 @@
 %
 %    Package titlesec support:
 %    \begin{macrocode}
-\@ifpackageloaded{titlesec}{%
+\Hy@ifpackageloaded{titlesec}{%
   \def\ttl@Hy@steplink#1{%
     \Hy@MakeCurrentHrefAuto{#1*}%
     \edef\ttl@Hy@saveanchor{%
@@ -11214,7 +11226,7 @@
 %
 %    Package titletoc support:
 %    \begin{macrocode}
-\@ifpackageloaded{titletoc}{%
+\Hy@ifpackageloaded{titletoc}{%
   \def\ttl@gobblecontents#1#2#3#4{\ignorespaces}%
 }{}
 %    \end{macrocode}
@@ -11226,7 +11238,7 @@
 %    \begin{macrocode}
 \AtBeginDocument{%
 \def\Hy@varioref@undefined{{??}{??}{}{}{}}
-\@ifpackageloaded{varioref}{%
+\Hy@ifpackageloaded{varioref}{%
   \def\vref@pagenum#1#2{%
     \@ifundefined{r@#2}{%
       \expandafter\let\csname r@#2\endcsname\Hy@varioref@undefined
@@ -11263,7 +11275,7 @@
 %    replace \cmd{\refstepcounter} by the original
 %    \cmd{\H@refstepcounter} without anchor generation
 %    \begin{macrocode}
-\@ifpackageloaded{longtable}{%
+\Hy@ifpackageloaded{longtable}{%
   \begingroup
     \def\y{\LT@array}%
     \@ifundefined{scr@LT@array}{%
@@ -11315,7 +11327,7 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\@ifpackageloaded{amsmath}{%
+\Hy@ifpackageloaded{amsmath}{%
   \long\def\Hy@temp{%
     \incr@eqnum
     \mathdisplay@push
@@ -11478,11 +11490,11 @@
 % also \texttt{cleveref}.
 %    \begin{macrocode}
 \Hy@AtBeginDocument{%
-\@ifpackageloaded{cleveref}{%
+\Hy@ifpackageloaded{cleveref}{%
 \let\Hy@savedthm\@thm
 \def\@thm{\ifhmode\unskip\fi\Hy@savedthm}%
 }{%
-\@ifpackageloaded{amsthm}{%
+\Hy@ifpackageloaded{amsthm}{%
 %    \end{macrocode}
 % Class amsbook uses a different definition of \cs{@thm},
 % where two lines are added (thanks to Dan Luecking for
@@ -11728,7 +11740,7 @@
 % Since v6.82i footnotes are only disabled inside the environment
 % `tabularx'.
 %    \begin{macrocode}
-  \@ifpackageloaded{tabularx}{%
+  \Hy@ifpackageloaded{tabularx}{%
     \let\HyOrg@TX@endtabularx\TX@endtabularx
     \def\Hy@tabularx@hook{%
       \let\@footnotetext\H@@footnotetext
@@ -11753,7 +11765,7 @@
 %    by hyperref. The result is a link by \verb+\footnotemark+
 %    without valid anchor
 %    \begin{macrocode}
-  \@ifpackageloaded{longtable}{%
+  \Hy@ifpackageloaded{longtable}{%
     \CheckCommand*{\LT@p@ftntext}[1]{%
       \edef\@tempa{%
         \the\LT@p@ftn
@@ -11797,7 +11809,7 @@
 %
 %    Footnotes for fancyvrb (Fix by Manuel P\'egouri\'e-Gonnard).
 %    \begin{macrocode}
-  \@ifpackageloaded{fancyvrb}{%
+  \Hy@ifpackageloaded{fancyvrb}{%
     \def\V@@footnotetext{%
       \insert\footins\bgroup
       \csname reset@font\endcsname
@@ -12012,7 +12024,7 @@
     \fi
   }%
 }%
-\@ifpackageloaded{float}{%
+\Hy@ifpackageloaded{float}{%
   \def\Hy@float@caption{%
     \ifx\Hy@float@currentHref\@undefined
       \hyper@makecurrent{\@captype}%
@@ -12203,7 +12215,7 @@
 % and it goes ape. Therefore, make an anodyne result first, call
 % its business, then go back to the real thing.
 %    \begin{macrocode}
-\@ifclassloaded{revtex}{%
+\Hy@ifclassloaded{revtex}{%
   \Hy@Info{*** compatibility with revtex **** }%
   \def\revtex@checking#1#2{%
     \expandafter\let\expandafter\T@temp\csname b@#1\endcsname
@@ -12288,7 +12300,7 @@
 % of harvard.sty, and the |\newcommand| macros causes error
 % messages.
 %    \begin{macrocode}
-\@ifpackageloaded{harvard}{%
+\Hy@ifpackageloaded{harvard}{%
   \Hy@AtBeginDocument{%
     \Hy@Info{*** compatibility with harvard **** }%
     \Hy@raiselinksfalse
@@ -12379,7 +12391,7 @@
 %    include the closing parentheses.
 %
 %    \begin{macrocode}
-\@ifpackageloaded{chicago}{%
+\Hy@ifpackageloaded{chicago}{%
 %    \end{macrocode}
 %    \begin{macro}{\citeN}
 %    \begin{macrocode}
@@ -12439,7 +12451,7 @@
 %
 % This where we supply a destination for each page.
 %    \begin{macrocode}
-\@ifclassloaded{slides}{%
+\Hy@ifclassloaded{slides}{%
   \def\Hy@SlidesFormatOptionalPage#1{(#1)}%
   \def\Hy@PageAnchorSlidesPlain{%
     \advance\c@page\@ne
@@ -12696,7 +12708,7 @@
 %
 % Version 6.77p uses a patch by Ross Moore.
 %    \begin{macrocode}
-\@ifpackageloaded{amsmath}{%
+\Hy@ifpackageloaded{amsmath}{%
   \def\Hy@make@anchor{%
     \Hy@MakeCurrentHrefAuto{AMS}%
     \Hy@raisedlink{\hyper@anchorstart{\@currentHref}\hyper@anchorend}%
@@ -12785,7 +12797,7 @@
 }%
 %</check>
 %<*package>
-\@ifpackageloaded{amsmath}{%
+\Hy@ifpackageloaded{amsmath}{%
   \@ifpackagelater{amsmath}{1999/12/14}{%
     \renewcommand*{\numberwithin}[3][\arabic]{%
       \@ifundefined{c@#2}{\@nocounterr{#2}}{%
@@ -12849,9 +12861,9 @@
     \let\hyperpage\HyOrg@hyperpage
   }%
   \Hy@nextfalse
-  \@ifpackageloaded{multind}{\Hy@nexttrue}{}%
-  \@ifpackageloaded{index}{\Hy@nexttrue}{}%
-  \@ifpackageloaded{amsmidx}{\Hy@nexttrue}{}%
+  \Hy@ifpackageloaded{multind}{\Hy@nexttrue}{}%
+  \Hy@ifpackageloaded{index}{\Hy@nexttrue}{}%
+  \Hy@ifpackageloaded{amsmidx}{\Hy@nexttrue}{}%
   \begingroup
     \lccode`\|=\expandafter`\HyInd@EncapChar\relax
     \lccode`\/=`\\\relax
@@ -13040,7 +13052,7 @@
 % \section{Compatibility with foiltex}
 %
 %    \begin{macrocode}
-\@ifclassloaded{foils}{%
+\Hy@ifclassloaded{foils}{%
   \providecommand*\ext@table{lot}%
   \providecommand*\ext@figure{lof}%
 }{}
@@ -13050,13 +13062,13 @@
 %    This requires \texttt{seminar.bg2}, version 1.6 or later.
 %    Contributions by Denis Girou (\Email{denis.girou@idris.fr}).
 %    \begin{macrocode}
-\@ifclassloaded{seminar}{%
+\Hy@ifclassloaded{seminar}{%
   \Hy@seminarslidestrue
   \providecommand\theHslide{\arabic{slide}}%
 }{%
   \Hy@seminarslidesfalse
 }
-\@ifpackageloaded{slidesec}{%
+\Hy@ifpackageloaded{slidesec}{%
   \providecommand\theHslidesection   {\arabic{slidesection}}%
   \providecommand\theHslidesubsection{%
     \theHslidesection.\arabic{slidesubsection}%
@@ -13342,7 +13354,7 @@
 }
 
 \Hy@AtBeginDocument{%
-  \@ifpackageloaded{varioref}{%
+  \Hy@ifpackageloaded{varioref}{%
     \def\@Refstar#1{%
       \HyRef@StarSetRef{#1}\HyRef@MakeUppercaseFirstOfFive
     }%
@@ -13539,11 +13551,11 @@
     \fi
   \fi
 }
-\@ifpackageloaded{showkeys}{%
+\Hy@ifpackageloaded{showkeys}{%
   \HyRef@ShowKeysInit
 }{%
   \Hy@AtBeginDocument{%
-    \@ifpackageloaded{showkeys}{%
+    \Hy@ifpackageloaded{showkeys}{%
       \HyRef@ShowKeysInit
     }{}%
   }%
@@ -14401,7 +14413,7 @@
     \expandafter\@gobble
   \fi
   {%
-    \@ifclassloaded{seminar}{%
+    \Hy@ifclassloaded{seminar}{%
 %<*pdftex>
       \setlength{\pdfhorigin}{1truein}%
       \setlength{\pdfvorigin}{1truein}%
@@ -17954,7 +17966,7 @@
 %<*tex4ht>
 \providecommand*{\XR@ext}{html}
 \let\Hy@raisedlink\@empty
-\@ifpackageloaded{tex4ht}{%
+\Hy@ifpackageloaded{tex4ht}{%
   \Hy@InfoNoLine{tex4ht is already loaded}%
 }{%
   \RequirePackage[htex4ht]{tex4ht}%
@@ -18936,7 +18948,7 @@
 \let\Fld@pageobjref\@empty
 \@ifundefined{pdfpageref}{%
 }{%
-  \@ifpackageloaded{zref-abspage}{%
+  \Hy@ifpackageloaded{zref-abspage}{%
     \newcount\HyAnn@Count
     \HyAnn@Count=\z@
     \def\HyAnn@AbsPageLabel{%
@@ -20852,12 +20864,12 @@
     \addcontentsline{toc}{chapter}{##1}%
   }%
 }
-\@ifclassloaded{scrbook}{%
+\Hy@ifclassloaded{scrbook}{%
   \@ifclasslater{scrbook}{2001/01/01}{%
     \let\Hy@tempa\@empty
   }{}%
 }{%
-  \@ifclassloaded{scrreprt}{%
+  \Hy@ifclassloaded{scrreprt}{%
     \@ifclasslater{scrreprt}{2001/01/01}{%
       \let\Hy@tempa\@empty
     }{}%
