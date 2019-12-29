@@ -10880,7 +10880,7 @@
   \@ifundefined{theH#1}{%
     \expandafter\def\csname theH#1\endcsname{}%
     \def\Hy@temp{\@elt{#1}}%
-    \@nelevel@sanitize\Hy@temp
+    \@onelevel@sanitize\Hy@temp
     \let\HyOrg@elt\@elt
     \edef\@elt{%
       \noexpand\HyCnt@LookForParentCounter
